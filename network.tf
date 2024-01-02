@@ -121,6 +121,11 @@ resource "aws_lb_target_group" "pcls-targetgroup" {
   port     = 80
   protocol = "HTTP"
   vpc_id   = aws_vpc.myvpc.id
+  stickiness {
+    type            = "lb_cookie"
+    cookie_duration = 86400
+    enabled = true
+  }
 }
 
 resource "aws_lb_listener" "pcls-listener" {
@@ -131,4 +136,9 @@ resource "aws_lb_listener" "pcls-listener" {
     type             = "forward"
     target_group_arn = aws_lb_target_group.pcls-targetgroup.arn
   }
+}
+
+resource "aws_network_interface" "pcls-networkinterface" {
+    subnet_id       = aws_subnet.pub-sub-1.id
+    security_groups = [aws_security_group.loadbalancer-securitygroups.id]
 }
