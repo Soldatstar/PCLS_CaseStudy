@@ -22,21 +22,6 @@ resource "aws_db_instance" "postgres" {
   depends_on = [aws_internet_gateway.gw]
 }
 
-#create redis
-resource "aws_elasticache_replication_group" "redis" {
-  replication_group_id          = "redis-replication-group"
-  description                   = "Redis replication group"
-  node_type                     = "cache.t3.small"
-  engine                        = "redis"
-  engine_version                = "5.0.5"
-  parameter_group_name          = "default.redis5.0"
-  port                          = 6379
-  subnet_group_name             = aws_elasticache_subnet_group.redis_subnet_group.name
-  auth_token                     = var.redis_auth
-  transit_encryption_enabled    = true
-  depends_on                    = [aws_internet_gateway.gw]
-}
-
 ### AUTOSCALING GROUP ###
 
 # Launch template for ec2

@@ -105,13 +105,6 @@ resource "aws_db_subnet_group" "postgres_subnet_group" {
   subnet_ids = [aws_subnet.pub-sub-1.id,aws_subnet.pub-sub-2.id]
 }
 
-# subnet linking to redis
-resource "aws_elasticache_subnet_group" "redis_subnet_group" {
-  name       = "redis-subnet-group"
-  subnet_ids = [aws_subnet.pub-sub-1.id]
-  depends_on = [aws_subnet.pub-sub-1]
-}
-
 ### LOADBALANCER ###
 
 resource "aws_lb" "pcls-loadbalancer" {
