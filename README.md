@@ -15,3 +15,5 @@ This file contains the Terraform code for setting up the security groups. It inc
 ## NewInstance.tf
 This file contains the Terraform code for setting up new Nextcloud instances using a existing config file.
 
+## More Information
+For more detailed information, please refer to the Detailed [Documentation](PCLS-HS23.pdf)
